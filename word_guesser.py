@@ -33,40 +33,40 @@ word = random.choice(create_word_list('wordlist.10000.txt', difficulty))
 
 valid_letters = "abcdefghijklmnopqrstuvwxyz"
 
-def create_view(text: str) -> str:
-    view = ""
+def create_display(text: str) -> str:
+    d = ""
     for char in text:
         if char.isalpha():
-            view += "_"
+            d += "_"
         elif char == " ":
-            view += " "
-    return view
+            d += " "
+    return d
 
-def show_menu(view):
+def show_menu(dis):
     print("Please choose an option from the menu:")
-    print(view)
+    print(dis)
     print("1. Guess a letter.")
     print("2. Guess entire word.")
     print("3. Quit.")
 
-def change_char_at_index(view: str, word: str, index: int, guess: str):
+def change_char_at_index(dis: str, word: str, index: int, guess: str):
     if word[index] == guess:
-        view = view[:index] + guess + view[index + 1:]
-    return view[index]
+        dis = dis[:index] + guess + dis[index + 1:]
+    return dis[index]
 
-def apply_guess_to_view(view: str, word: str, guess: str):
+def apply_guess_to_display(dis: str, word: str, guess: str):
     v = ""
     for index in range(len(word)):
-        v += change_char_at_index(view, word, index, guess)
+        v += change_char_at_index(dis, word, index, guess)
     return v
 
 def selection():
     user_input = ""
     lives = 6
     correct_guesses = 0
-    view = create_view(word)
-    while user_input != "3" and lives > 0 and view != word:
-        show_menu(view)
+    dis = create_display(word)
+    while user_input != "3" and lives > 0 and dis != word:
+        show_menu(dis)
         user_input = input("Enter your turn selection: ")
         if user_input == "1":
             guess = input("Please enter your single, lowercase letter guess: ")
@@ -76,8 +76,8 @@ def selection():
                     print("You have " + str(lives) + " guesses left, with " + str(correct_guesses) + " letters guessed correctly.")
                 elif guess in word:
                     correct_guesses += 1
-                    view = apply_guess_to_view(view, word, guess)
-                    if view != word:
+                    dis = apply_guess_to_display(dis, word, guess)
+                    if dis != word:
                         print("You have " + str(lives) + " guesses left, with " + str(correct_guesses) + " letters guessed correctly.")
             else:
                 print("That guess is an invalid entry. Please try again.")
@@ -98,7 +98,7 @@ def selection():
             print("That is not a valid selection. Please try again.")
     if lives == 0:
         print("You lose! The word was: " + word + ".")
-    elif view == word:
+    elif dis == word:
         print("Congratulations, you win! The word was: " + word + ".")
 
 selection()
