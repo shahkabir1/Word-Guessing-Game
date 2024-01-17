@@ -7,8 +7,15 @@ def intro():
 
 intro()
 
+def difficulty_input():
+    difficulty = input("Please select a difficulty (Easy or Hard): ")
+    if difficulty == "Easy" or difficulty == "Hard":
+        return difficulty
+    else:
+        print("That is not a valid difficulty. Please try again.")
+        difficulty_input()
 
-difficulty = input("Please select a difficulty (Easy or Hard): ")
+diff = difficulty_input()
 
 def choose_difficulty(diff: str):
     if diff == "Easy":
@@ -29,7 +36,7 @@ def create_word_list(file: TextIO, diff: str) -> list[str]:
                     word_lst.append(line.lower().strip())
     return word_lst
 
-word = random.choice(create_word_list('wordlist.10000.txt', difficulty))
+word = random.choice(create_word_list('wordlist.10000.txt', diff))
 
 valid_letters = "abcdefghijklmnopqrstuvwxyz"
 
