@@ -49,12 +49,12 @@ def show_menu(view):
     print("2. Guess entire word.")
     print("3. Quit.")
 
-def update_view_at_index(view: str, word: str, index: int, guess: str):
+def change_char_at_index(view: str, word: str, index: int, guess: str):
     if word[index] == guess:
         view = view[:index] + guess + view[index + 1:]
     return view[index]
 
-def update_view_with_guess(view: str, word: str, guess: str):
+def apply_guess_to_view(view: str, word: str, guess: str):
     v = ""
     for index in range(len(word)):
         v += update_view_at_index(view, word, index, guess)
