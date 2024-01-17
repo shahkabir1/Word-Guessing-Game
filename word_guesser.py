@@ -57,7 +57,7 @@ def change_char_at_index(view: str, word: str, index: int, guess: str):
 def apply_guess_to_view(view: str, word: str, guess: str):
     v = ""
     for index in range(len(word)):
-        v += update_view_at_index(view, word, index, guess)
+        v += change_char_at_index(view, word, index, guess)
     return v
 
 def selection():
